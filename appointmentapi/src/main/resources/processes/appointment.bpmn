@@ -60,6 +60,21 @@
       <bpmn:incoming>Flow_11w9e90</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_11w9e90" sourceRef="Activity_0jiv8y5" targetRef="Event_07gdyie" />
+    <bpmn:subProcess id="Activity_1o1g5bv" triggeredByEvent="true">
+      <bpmn:startEvent id="Event_0rcv9tx">
+        <bpmn:outgoing>Flow_0c1v5ou</bpmn:outgoing>
+        <bpmn:signalEventDefinition id="SignalEventDefinition_1k2f822" signalRef="Signal_079jhrz" />
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="Flow_0c1v5ou" sourceRef="Event_0rcv9tx" targetRef="Activity_10sxf3q" />
+      <bpmn:serviceTask id="Activity_10sxf3q" name="DS Delegate" camunda:delegateExpression="${dsDelegate}">
+        <bpmn:incoming>Flow_0c1v5ou</bpmn:incoming>
+        <bpmn:outgoing>Flow_0n5mzv0</bpmn:outgoing>
+      </bpmn:serviceTask>
+      <bpmn:endEvent id="Event_0e5g2gp">
+        <bpmn:incoming>Flow_0n5mzv0</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="Flow_0n5mzv0" sourceRef="Activity_10sxf3q" targetRef="Event_0e5g2gp" />
+    </bpmn:subProcess>
     <bpmn:textAnnotation id="TextAnnotation_1x0oyum">
       <bpmn:text>Customer Requests Appointment</bpmn:text>
     </bpmn:textAnnotation>
@@ -88,12 +103,18 @@
       <bpmn:text>RM Reads Modified Appointment</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="Association_04x59gw" sourceRef="Activity_1v12rlr" targetRef="TextAnnotation_10ju72o" />
+    <bpmn:textAnnotation id="TextAnnotation_145cxja">
+      <bpmn:text>Initialize Digital Signature Process</bpmn:text>
+    </bpmn:textAnnotation>
   </bpmn:process>
   <bpmn:message id="Message_0db4s8a" name="AppointmentRequest" />
   <bpmn:message id="Message_1a0kbii" name="RMWilling" />
   <bpmn:message id="Message_1sjzf2z" name="RMNotWilling" />
   <bpmn:message id="Message_08vwtns" name="AppointmentRejected" />
   <bpmn:message id="Message_0awtfa1" name="AppointmentChanged" />
+  <bpmn:signal id="Signal_0ngr2hs" name="DSSignal" />
+  <bpmn:message id="Message_0sy83zf" name="testmessage" />
+  <bpmn:signal id="Signal_079jhrz" name="DSSignal2021" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="appointmentapi">
       <bpmndi:BPMNShape id="TextAnnotation_1x0oyum_di" bpmnElement="TextAnnotation_1x0oyum">
@@ -116,6 +137,9 @@
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_0s6bgfb_di" bpmnElement="TextAnnotation_0s6bgfb">
         <dc:Bounds x="770" y="279" width="100" height="41" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_145cxja_di" bpmnElement="TextAnnotation_145cxja">
+        <dc:Bounds x="280" y="545" width="170" height="65" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_08va5r8_di" bpmnElement="SequenceFlow1">
         <di:waypoint x="198" y="410" />
@@ -230,6 +254,26 @@
         <di:waypoint x="750" y="321" />
         <di:waypoint x="770" y="313" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Activity_1ixa5zx_di" bpmnElement="Activity_1o1g5bv" isExpanded="true">
+        <dc:Bounds x="210" y="680" width="350" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0c1v5ou_di" bpmnElement="Flow_0c1v5ou">
+        <di:waypoint x="286" y="780" />
+        <di:waypoint x="340" y="780" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0n5mzv0_di" bpmnElement="Flow_0n5mzv0">
+        <di:waypoint x="440" y="780" />
+        <di:waypoint x="502" y="780" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_000cf4w_di" bpmnElement="Event_0rcv9tx">
+        <dc:Bounds x="250" y="762" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_113dl0c_di" bpmnElement="Activity_10sxf3q">
+        <dc:Bounds x="340" y="740" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0e5g2gp_di" bpmnElement="Event_0e5g2gp">
+        <dc:Bounds x="502" y="762" width="36" height="36" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_00xcv85_di" bpmnElement="Event_1vv1wiv" bioc:stroke="#fb8c00" bioc:fill="#ffe0b2" color:background-color="#ffe0b2" color:border-color="#fb8c00">
         <dc:Bounds x="682" y="282" width="36" height="36" />
       </bpmndi:BPMNShape>
