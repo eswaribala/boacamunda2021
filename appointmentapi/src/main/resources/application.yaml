@@ -16,5 +16,6 @@ camunda.bpm:
 server.port: 7072
 spring.data.mongodb.host: localhost
 spring.data.mongodb.port: 27017
-spring.data.mongodb.database: customerdb
-spring.data.mongodb.url: mongodb://localhost:27017/stockdb
+spring.data.mongodb.database: appointmentdb
+spring.data.mongodb.url: mongodb://localhost:27017/appointmentdb
+appointmentUrl: http://localhost:7072/appointments
